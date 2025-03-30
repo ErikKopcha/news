@@ -69,8 +69,15 @@ def get_news_summary():
 # --- Telegram send function ---
 def send_news(context=None):
     bot = Bot(token=TELEGRAM_TOKEN)
-    news = get_news_summary()
-    bot.send_message(chat_id=CHAT_ID, text=news)
+
+    try:
+        bot.send_message(chat_id=CHAT_ID, text="📢 Розсилка новин запущена…")
+        news = get_news_summary()
+        bot.send_message(chat_id=CHAT_ID, text=news)
+        bot.send_message(chat_id=CHAT_ID, text="✅ Готово!")
+    except Exception as e:
+        bot.send_message(chat_id=CHAT_ID, text=f"❌ Помилка під час розсилки:\n{str(e)}")
+
 
 # --- For manual command (optional) ---
 async def news_command(update, context):
