@@ -1,10 +1,10 @@
 import os
 import json
-import openai
 import logging
 from datetime import datetime
 from telegram import Bot
 from telegram.ext import Application, CommandHandler
+from openai import OpenAI
 
 # --- Load ENV ---
 from dotenv import load_dotenv
@@ -13,7 +13,8 @@ load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-openai.api_key = OPENAI_API_KEY
+
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 HISTORY_FILE = "news_history.json"
 
@@ -51,7 +52,7 @@ def get_news_summary():
     history = load_history()
     prompt = PROMPT_TEMPLATE + f"\nОсь попередні новини: {history[-5:]}"
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "Ти аналітик новин."},
