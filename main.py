@@ -52,7 +52,7 @@ def get_news_summary():
     prompt = PROMPT_TEMPLATE + f"\nОсь попередні новини: {history[-5:]}"
 
     response = client.chat.completions.create(
-        model="gpt-4.5-preview",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "Ти аналітик новин."},
             {"role": "user", "content": prompt}
