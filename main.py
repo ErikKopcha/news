@@ -69,6 +69,7 @@ def get_news_summary():
 # --- Telegram send function ---
 def send_news(context=None):
     bot = Bot(token=TELEGRAM_TOKEN)
+    
     try:
         bot.send_message(chat_id=CHAT_ID, text="📢 Розсилка новин запущена…")
         news = get_news_summary()
