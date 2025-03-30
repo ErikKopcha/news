@@ -22,7 +22,7 @@ PROMPT_TEMPLATE = """
 Мене цікавлять теми:
 - криптовалюти та інвестиції
 - технології (AI, hardware, великі компанії)
-- програмуванняб, Frontend (React, Next.js, JavaScript)
+- програмування, Frontend (React, Next.js, JavaScript)
 - стихійні лиха, катастрофи
 - головні новини України та світу
 
@@ -69,7 +69,6 @@ def get_news_summary():
 # --- Telegram send function ---
 def send_news(context=None):
     bot = Bot(token=TELEGRAM_TOKEN)
-
     try:
         bot.send_message(chat_id=CHAT_ID, text="📢 Розсилка новин запущена…")
         news = get_news_summary()
@@ -77,7 +76,6 @@ def send_news(context=None):
         bot.send_message(chat_id=CHAT_ID, text="✅ Готово!")
     except Exception as e:
         bot.send_message(chat_id=CHAT_ID, text=f"❌ Помилка під час розсилки:\n{str(e)}")
-
 
 # --- For manual command (optional) ---
 async def news_command(update, context):
