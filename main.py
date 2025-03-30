@@ -6,7 +6,6 @@ from telegram import Bot
 from telegram.ext import Application, CommandHandler
 from openai import OpenAI
 
-# --- Load ENV ---
 from dotenv import load_dotenv
 load_dotenv()
 
