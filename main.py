@@ -79,6 +79,7 @@ def send_news(context=None):
 
 # --- For manual command (optional) ---
 async def news_command(update, context):
+    print("/news command received")
     news = get_news_summary()
     await update.message.reply_text(news)
 
@@ -87,6 +88,10 @@ def main():
     logging.basicConfig(level=logging.INFO)
     application = Application.builder().token(TELEGRAM_TOKEN).build()
     application.add_handler(CommandHandler("news", news_command))
+
+    bot = Bot(token=TELEGRAM_TOKEN)
+    bot.send_message(chat_id=CHAT_ID, text="🤖 Бот запущено та готовий до роботи!")
+
     application.run_polling()
 
 if __name__ == "__main__":
